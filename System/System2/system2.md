@@ -1,0 +1,5 @@
+# Write-up System2
+
+Ce fichier décrit l'installation et la compilation d'un programme nommé "exec" en C. Ce programme affiche l'ID de l'utilisateur et l'ID d'exécution, puis lit une commande du système entrée par l'utilisateur et l'exécute à l'aide de la fonction "execvp". Le fichier "exec" compilé est ensuite rendu exécutable par tout utilisateur en utilisant la commande "chmod 4755 exec".
+
+La vulnérabilité critique introduite est que le fichier "exec" a été rendu exécutable en tant que "setuid root" en utilisant la commande "`chmod 4755 exec`", (donc flag: compile.sh:3). Cela signifie que le fichier "exec" peut être exécuté avec les privilèges du superutilisateur, ce qui peut entraîner une compromission complète du système. Le code source n'effectue aucune vérification des entrées de l'utilisateur, ce qui peut entraîner une injection de commandes.
